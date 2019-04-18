@@ -12,6 +12,7 @@ namespace Blogs.Controllers
         public HomeController(IBloggingRepository repo) => repository = repo;
 
         public IActionResult Index() => View(repository.Blogs.OrderBy(b => b.Name));
+        // Method is only accessible if user is authenticated and has role "Moderate"
         [Authorize(Roles = "Moderate")]
         public IActionResult AddBlog() => View();
 
@@ -23,6 +24,7 @@ namespace Blogs.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        // Method is only accesible if the user is authenticated and has role "Moderate"
         [Authorize(Roles = "Moderate")]
         public IActionResult AddBlog(Blog model)
         {
@@ -41,6 +43,7 @@ namespace Blogs.Controllers
             return View();
         }
 
+        // Method is only accessible if the user is authenticated and has role "Moderate"
         [Authorize(Roles = "Moderate")]
         public IActionResult DeleteBlog(int id)
         {
@@ -48,6 +51,7 @@ namespace Blogs.Controllers
             return RedirectToAction("Index");
         }
 
+        // Method is only accessible if the user is authenticated
         [Authorize]
         public IActionResult AddPost(int id)
         {
@@ -57,6 +61,8 @@ namespace Blogs.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        // Method is only accessible if the user is authenticated
+        [Authorize]
         public IActionResult AddPost(int id, Post post)
         {
             post.BlogId = id;
@@ -69,6 +75,7 @@ namespace Blogs.Controllers
             return View();
         }
 
+        // Method is only accessible if the user is authenticated and has role "Moderate"
         [Authorize(Roles = "Moderate")]
         public IActionResult DeletePost(int id)
         {

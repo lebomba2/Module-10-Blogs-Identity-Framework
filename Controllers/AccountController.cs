@@ -21,6 +21,7 @@ namespace Blogs.Controllers
             signInManager = signInMgr;
         }
 
+        // Method is accessible to anyone
         [AllowAnonymous]
         public IActionResult Login(string returnUrl)
         {
@@ -30,6 +31,7 @@ namespace Blogs.Controllers
         }
 
         [HttpPost]
+        // Method is accessible to anyone
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel details, string returnUrl)
@@ -51,6 +53,7 @@ namespace Blogs.Controllers
             return View(details);
         }
 
+        // Method is accessible to anyone
         [AllowAnonymous]
         public ViewResult AccessDenied() => View();
 

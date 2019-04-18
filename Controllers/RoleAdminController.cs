@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blogs.Controllers
 {
+    // Method is only accessible if the user is authenticated and has role "Admin"
     [Authorize(Roles = "Admin")]
     public class RoleAdminController : Controller
     {

@@ -13,22 +13,18 @@ else
         {
             <li>
                 <a asp-action="BlogDetail" asp-route-id="@blog.BlogId">@blog.Name</a>
-                @if (User?.Identity?.IsAuthenticated ?? true)
+                @* if the user is in the "Moderate" role, show this button *@
+                @if (User.IsInRole("Moderate"))
                 {
-                    if (User.IsInRole("Moderate"))
-                    {
-                        <span> | </span><a asp-action="DeleteBlog" asp-route-id="@blog.BlogId">Delete</a>
-                    }
+                    <span> | </span><a asp-action="DeleteBlog" asp-route-id="@blog.BlogId">Delete</a>
                 }
             </li>
         }
     </ul>
 }
-@if (User?.Identity?.IsAuthenticated ?? true)
+@* if the user is in the role "Moderate", show this button *@
+@if (User.IsInRole("Moderate"))
 {
-    if (User.IsInRole("Moderate"))
-    {
-        <hr />
-        <a asp-action="AddBlog">New Blog</a>
-    }
+    <hr />
+    <a asp-action="AddBlog">New Blog</a>
 }
